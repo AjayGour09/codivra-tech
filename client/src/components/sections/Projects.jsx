@@ -1,57 +1,43 @@
-
-import { ArrowUpRight, ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
     number: "01",
-    title: "AI Interview Platform",
-    category: "AI / Web Application",
+    title: "Desh Videsh Darpan",
+    category: "News / Web Application",
     description:
-      "An interview preparation platform with AI-powered practice, resume checks and interactive quizzes.",
-    tech: ["React", "AI", "JavaScript"],
-  },
-  {
-    number: "02",
-    title: "Smart Kirana Store",
-    category: "E-commerce / Management",
-    description:
-      "A modern retail management concept designed to make product browsing and everyday store operations simpler.",
-    tech: ["React", "Firebase", "Tailwind"],
-  },
-  {
-    number: "03",
-    title: "Smart Tour Guide",
-    category: "Travel / Web Application",
-    description:
-      "A travel-focused digital experience for discovering destinations, planning trips and presenting useful information.",
-    tech: ["React", "API", "UI/UX"],
-  },
-  {
-    number: "04",
-    title: "Trading Platform",
-    category: "Fintech / Dashboard",
-    description:
-      "A modern trading dashboard concept with a clean, responsive and data-focused interface.",
-    tech: ["React", "Charts", "Responsive UI"],
+      "A modern news platform designed to deliver national and international news with a clean, responsive and user-friendly experience.",
+    tech: ["React", "JavaScript", "Tailwind CSS"],
+    image: "/projects/desh-videsh-darpan.png",
+    liveLink: "https://lnkd.in/gGnNsuJK",
+    codeLink: "https://lnkd.in/gXw97WhE",
   },
 ];
 
 function ProjectCard({ project }) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
-      <div className="relative flex aspect-[16/9] items-end overflow-hidden bg-gradient-to-br from-zinc-800 via-zinc-950 to-black p-7">
-        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl transition group-hover:bg-white/10" />
+    <article className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950 transition hover:border-zinc-600">
+      {/* Project Image */}
+      <div className="relative h-64 overflow-hidden border-b border-zinc-800">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="h-full w-full object-cover transition duration-500 hover:scale-105"
+        />
 
-        <span className="relative text-sm text-zinc-500">
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+        <span className="absolute left-7 top-7 text-sm text-white/70">
           {project.number}
         </span>
 
-        <span className="absolute bottom-7 right-7 rounded-full border border-zinc-700 bg-black/70 px-3 py-1.5 text-xs text-zinc-300">
+        <span className="absolute bottom-7 right-7 rounded-full border border-white/20 bg-black/70 px-3 py-1.5 text-xs text-zinc-300 backdrop-blur-sm">
           {project.category}
         </span>
       </div>
 
+      {/* Project Content */}
       <div className="p-7">
         <h3 className="text-2xl font-semibold">
           {project.title}
@@ -61,6 +47,7 @@ function ProjectCard({ project }) {
           {project.description}
         </p>
 
+        {/* Technologies */}
         <div className="mt-6 flex flex-wrap gap-2">
           {project.tech.map((item) => (
             <span
@@ -72,18 +59,28 @@ function ProjectCard({ project }) {
           ))}
         </div>
 
-        <button
-          type="button"
-          className="mt-7 inline-flex items-center gap-2 text-sm text-zinc-300 transition hover:text-white"
-          onClick={() =>
-            alert(
-              `${project.title} case study will be available soon.`
-            )
-          }
-        >
-          Case study
-          <ExternalLink size={15} />
-        </button>
+        {/* Links */}
+        <div className="mt-7 flex flex-wrap gap-3">
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-zinc-200"
+          >
+            Live Project
+            <ExternalLink size={15} />
+          </a>
+
+          <a
+            href={project.codeLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-zinc-700 px-5 py-2.5 text-sm text-zinc-300 transition hover:border-white hover:text-white"
+          >
+            View Code
+            <ExternalLink size={15} />
+          </a>
+        </div>
       </div>
     </article>
   );
@@ -91,39 +88,31 @@ function ProjectCard({ project }) {
 
 function Projects({ preview = false }) {
   const visibleProjects = preview
-    ? projects.slice(0, 3)
+    ? projects.slice(0, 1)
     : projects;
 
   return (
-    <section className="border-t border-zinc-900 bg-black py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-7xl px-6">
+
+        {/* Home Preview */}
         {preview && (
-          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-                Selected work
-              </p>
+          <div className="mb-14">
+            <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
+              Selected work
+            </p>
 
-              <h2 className="mt-4 text-4xl font-bold md:text-5xl">
-                Projects that show what we can do.
-              </h2>
+            <h2 className="mt-4 text-4xl font-bold md:text-5xl">
+              Projects that show what we can do.
+            </h2>
 
-              <p className="mt-5 max-w-2xl leading-7 text-zinc-400">
-                A selection of projects and concepts built with modern
-                technologies.
-              </p>
-            </div>
-
-            <Link
-              to="/projects"
-              className="inline-flex w-fit items-center gap-2 rounded-full border border-zinc-700 px-5 py-3 text-sm transition hover:border-white"
-            >
-              View all
-              <ArrowUpRight size={16} />
-            </Link>
+            <p className="mt-5 max-w-2xl leading-7 text-zinc-400">
+              A selection of projects built with modern technologies.
+            </p>
           </div>
         )}
 
+        {/* Full Projects Page */}
         {!preview && (
           <div className="mx-auto mb-14 max-w-3xl text-center">
             <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
@@ -140,6 +129,7 @@ function Projects({ preview = false }) {
           </div>
         )}
 
+        {/* Projects Grid */}
         <div className="grid gap-6 lg:grid-cols-2">
           {visibleProjects.map((project) => (
             <ProjectCard
@@ -148,6 +138,7 @@ function Projects({ preview = false }) {
             />
           ))}
         </div>
+
       </div>
     </section>
   );
